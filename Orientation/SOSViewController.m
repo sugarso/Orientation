@@ -25,7 +25,7 @@
     ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
     
     [library enumerateGroupsWithTypes:ALAssetsGroupAll usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
-        NSLog(@"GROUP %@", group);
+        //NSLog(@"GROUP %@", group);
         NSString *albumName = [group valueForProperty:ALAssetsGroupPropertyName];
         
         if(group) {
@@ -43,7 +43,6 @@
                     } else if ([[result valueForProperty:ALAssetPropertyType] isEqualToString:ALAssetTypePhoto]) {
                         UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:assetUrl]];
                         printOrientationForName(@"UIImage", image.imageOrientation);
-
                     } else {
                         NSLog(@"Asset type WTF %@", [result valueForProperty:ALAssetPropertyType]);
                     }
@@ -62,34 +61,33 @@ void printTransformForName(NSString *name, CGAffineTransform prefferedTransform,
     NSLog(@"%@ %@ %@", name, NSStringFromCGAffineTransform(prefferedTransform), NSStringFromCGSize(size));
 }
 
-NSString *NSStringFromUIImageOrientation(UIImageOrientation imageOrientation)
-{
-    switch (imageOrientation) {
-        case UIImageOrientationDown:
-            return [NSString stringWithFormat:@"%@ [%d]", @"UIImageOrientationDown", UIImageOrientationDown];
-        case UIImageOrientationDownMirrored:
-            return [NSString stringWithFormat:@"%@ [%d]", @"UIImageOrientationDownMirrored", UIImageOrientationDownMirrored];
-        case UIImageOrientationLeft:
-            return [NSString stringWithFormat:@"%@ [%d]", @"UIImageOrientationLeft", UIImageOrientationLeft];
-        case UIImageOrientationLeftMirrored:
-            return [NSString stringWithFormat:@"%@ [%d]", @"UIImageOrientationLeftMirrored", UIImageOrientationLeftMirrored];
-        case UIImageOrientationUp:
-            return [NSString stringWithFormat:@"%@ [%d]", @"UIImageOrientationUp", UIImageOrientationUp];
-        case UIImageOrientationUpMirrored:
-            return [NSString stringWithFormat:@"%@ [%d]", @"UIImageOrientationUpMirrored", UIImageOrientationUpMirrored];
-        case UIImageOrientationRight:
-            return [NSString stringWithFormat:@"%@ [%d]", @"UIImageOrientationRight", UIImageOrientationRight];
-        case UIImageOrientationRightMirrored:
-            return [NSString stringWithFormat:@"%@ [%d]", @"UIImageOrientationRightMirrored", UIImageOrientationRightMirrored];
-        default:
-            NSLog(@"WTF %d!!", imageOrientation);
-    }
-}
-
 void printOrientationForName(NSString *name, UIImageOrientation imageOrientation) {
     NSLog(@"%@ %@", name, NSStringFromUIImageOrientation(imageOrientation));
 }
 
+NSString *NSStringFromUIImageOrientation(UIImageOrientation imageOrientation)
+{
+    switch (imageOrientation) {
+        case UIImageOrientationDown:
+            return [NSString stringWithFormat:@"%@ [%ld]", @"UIImageOrientationDown", UIImageOrientationDown];
+        case UIImageOrientationDownMirrored:
+            return [NSString stringWithFormat:@"%@ [%ld]", @"UIImageOrientationDownMirrored", UIImageOrientationDownMirrored];
+        case UIImageOrientationLeft:
+            return [NSString stringWithFormat:@"%@ [%ld]", @"UIImageOrientationLeft", UIImageOrientationLeft];
+        case UIImageOrientationLeftMirrored:
+            return [NSString stringWithFormat:@"%@ [%ld]", @"UIImageOrientationLeftMirrored", UIImageOrientationLeftMirrored];
+        case UIImageOrientationUp:
+            return [NSString stringWithFormat:@"%@ [%ld]", @"UIImageOrientationUp", UIImageOrientationUp];
+        case UIImageOrientationUpMirrored:
+            return [NSString stringWithFormat:@"%@ [%ld]", @"UIImageOrientationUpMirrored", UIImageOrientationUpMirrored];
+        case UIImageOrientationRight:
+            return [NSString stringWithFormat:@"%@ [%ld]", @"UIImageOrientationRight", UIImageOrientationRight];
+        case UIImageOrientationRightMirrored:
+            return [NSString stringWithFormat:@"%@ [%ld]", @"UIImageOrientationRightMirrored", UIImageOrientationRightMirrored];
+        default:
+            NSLog(@"WTF %ld!!", imageOrientation);
+    }
+}
 
 - (void)didReceiveMemoryWarning
 {
